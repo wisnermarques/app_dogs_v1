@@ -22,23 +22,4 @@ class DogRepository {
           age: map['age'] as int);
     }).toList();
   }
-
-  Future<void> updateDog(Dog dog) async {
-    final db = await DatabaseHelper.initDb();
-    await db.update(
-      'dogs',
-      dog.toMap(),
-      where: 'id = ?',
-      whereArgs: [dog.id],
-    );
-  }
-
-  Future<void> deleteDog(int id) async {
-    final db = await DatabaseHelper.initDb();
-    await db.delete(
-      'dogs',
-      where: 'id = ?',
-      whereArgs: [id],
-    );
-  }
 }
