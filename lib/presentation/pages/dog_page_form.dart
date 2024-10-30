@@ -20,7 +20,6 @@ class _DogPageFormState extends State<DogPageForm> {
   Future<void> saveDog() async {
     if (_formKey.currentState!.validate()) {
       final dog = Dog(
-        id: 0,
         name: nomeController.text,
         age: int.parse(idadeController.text),
       );

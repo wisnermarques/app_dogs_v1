@@ -9,4 +9,8 @@ class DogViewModel {
   Future<void> addDog(Dog dog) async {
     await repository.insertDog(dog);
   }
+
+  Future<List<Dog>> getDogs() async {
+    return await repository.getDogs();
+  }
 }
