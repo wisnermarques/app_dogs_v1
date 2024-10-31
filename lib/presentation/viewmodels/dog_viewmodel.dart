@@ -13,4 +13,12 @@ class DogViewModel {
   Future<List<Dog>> getDogs() async {
     return await repository.getDogs();
   }
+
+  Future<void> updateDog(Dog dog) async {
+    await repository.updateDog(dog);
+  }
+
+  Future<void> deleteDog(int? id) async {
+    await repository.deleteDog(id!);
+  }
 }

@@ -25,6 +25,14 @@ class _DogPageFormState extends State<DogPageForm> {
       );
       // print(dog.toMap());
       await _viewModel.addDog(dog);
+
+      // Verifica se o widget ainda está montado antes de exibir o Snackbar ou navegar
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Dog adicionado com sucesso!')),
+        );
+        Navigator.pop(context); // Fecha a página após salvar
+      }
     }
   }
 

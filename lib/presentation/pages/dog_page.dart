@@ -1,3 +1,4 @@
+import 'package:app_dogs/presentation/pages/dog_page_form.dart';
 import 'package:flutter/material.dart';
 import '../../data/models/dog_model.dart';
 import '../../data/repositories/dog_repository.dart';
@@ -13,6 +14,7 @@ class DogPage extends StatefulWidget {
 class DogPageState extends State<DogPage> {
   List<Dog> _dogs = [];
   final DogViewModel _viewModel = DogViewModel(DogRepository());
+  Dog? _lastDeletedDog;
 
   @override
   void initState() {
@@ -25,6 +27,36 @@ class DogPageState extends State<DogPage> {
     if (mounted) {
       setState(() {});
     }
+  }
+
+  Future<void> _deleteDog(Dog dog) async {
+    await _viewModel.deleteDog(dog.id!);
+    _lastDeletedDog = dog;
+
+    final snackBar = SnackBar(
+      content: Text('${dog.name} deletado'),
+      action: SnackBarAction(
+        label: 'Desfazer',
+        onPressed: () {
+          if (_lastDeletedDog != null && mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text('Desfeita a exclusão de ${_lastDeletedDog!.name}'),
+            ));
+            _viewModel.addDog(_lastDeletedDog!);
+            setState(() {
+              _dogs.add(_lastDeletedDog!);
+              _lastDeletedDog = null;
+            });
+          }
+        },
+      ),
+    );
+
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+
+    await _loadDogs();
   }
 
   @override
@@ -74,7 +106,9 @@ class DogPageState extends State<DogPage> {
                           ),
                           IconButton(
                             icon: const Icon(Icons.delete, color: Colors.red),
-                            onPressed: () {},
+                            onPressed: () {
+                              _deleteDog(dog);
+                            },
                           ),
                         ],
                       ),
@@ -84,7 +118,12 @@ class DogPageState extends State<DogPage> {
               ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const DogPageForm()),
+          ).then((_) => _loadDogs());
+        },
         backgroundColor: Colors.teal,
         tooltip: 'Adicionar Dog', // Cor do botão
         child: const Icon(Icons.add, size: 30),
