@@ -32,6 +32,25 @@ class DogEditPageState extends State<DogEditPage> {
     super.dispose();
   }
 
+  _updateDog() async {
+    if (_formKey.currentState?.validate() ?? false) {
+      final updatedDog = Dog(
+        id: widget.dog.id, // Mantém o ID original
+        name: _nameController.text,
+        age: int.parse(_ageController.text),
+      );
+
+      await _viewModel.updateDog(updatedDog);
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Dog atualizado com sucesso!')),
+        );
+        Navigator.pop(context, updatedDog); // Retorna o dog atualizado
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,7 +123,7 @@ class DogEditPageState extends State<DogEditPage> {
                       ),
                       const SizedBox(height: 30),
                       ElevatedButton.icon(
-                        onPressed: () {},
+                        onPressed: _updateDog,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.teal,
                           padding: const EdgeInsets.symmetric(
@@ -117,7 +136,7 @@ class DogEditPageState extends State<DogEditPage> {
                         ),
                         icon: const Icon(Icons.save, size: 24),
                         label: const Text(
-                          'Alteração salvas',
+                          'Salvar Alterações',
                           style: TextStyle(fontSize: 18),
                         ),
                       ),

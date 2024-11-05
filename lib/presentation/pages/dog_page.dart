@@ -1,3 +1,4 @@
+import 'package:app_dogs/presentation/pages/dog_edit_page.dart';
 import 'package:app_dogs/presentation/pages/dog_page_form.dart';
 import 'package:flutter/material.dart';
 import '../../data/models/dog_model.dart';
@@ -102,7 +103,14 @@ class DogPageState extends State<DogPage> {
                         children: [
                           IconButton(
                             icon: const Icon(Icons.edit, color: Colors.orange),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DogEditPage(dog: dog),
+                                ),
+                              ).then((_) => _loadDogs());
+                            },
                           ),
                           IconButton(
                             icon: const Icon(Icons.delete, color: Colors.red),
