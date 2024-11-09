@@ -1,9 +1,9 @@
-import 'package:app_dogs/presentation/pages/dog_edit_page.dart';
-import 'package:app_dogs/presentation/pages/dog_page_form.dart';
+import 'package:app_dogs/presentation/pages/dogs/dog_edit_page.dart';
+import 'package:app_dogs/presentation/pages/dogs/dog_page_form.dart';
 import 'package:flutter/material.dart';
-import '../../data/models/dog_model.dart';
-import '../../data/repositories/dog_repository.dart';
-import '../viewmodels/dog_viewmodel.dart';
+import '../../../data/models/dog_model.dart';
+import '../../../data/repositories/dog_repository.dart';
+import '../../viewmodels/dog_viewmodel.dart';
 
 class DogPage extends StatefulWidget {
   const DogPage({super.key});

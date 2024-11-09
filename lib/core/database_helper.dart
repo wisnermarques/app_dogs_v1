@@ -12,11 +12,17 @@ class DatabaseHelper {
         );
         // Criação da tabela pessoas
         return db.execute(
-          'CREATE TABLE pessoas(id INTEGER PRIMARY KEY, nome TEXT, telefone TEXT, email TEXT, endereco TEXT)',
+          'CREATE TABLE pessoas (id INTEGER PRIMARY KEY, nome TEXT NOT NULL, telefone TEXT, email TEXT, enderecoAvRua TEXT, enderecoNumero TEXT, enderecoCep TEXT, enderecoCidade TEXT, enderecoEstado TEXT);',
         );
       },
-      version:
-          1, // Mantenha a versão como 1 ou incremente se já houver um banco de dados existente
+      version: 2, // Atualize a versão do banco de dados para 2
+      onUpgrade: (db, oldVersion, newVersion) {
+        if (oldVersion < 3) {
+          db.execute(
+            'ALTER TABLE pessoas ADD COLUMN bairro TEXT;',
+          );
+        }
+      },
     );
   }
 }

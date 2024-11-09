@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../data/models/dog_model.dart';
-import '../../data/repositories/dog_repository.dart';
-import '../viewmodels/dog_viewmodel.dart';
+import '../../../data/models/dog_model.dart';
+import '../../../data/repositories/dog_repository.dart';
+import '../../viewmodels/dog_viewmodel.dart';
 
 class DogEditPage extends StatefulWidget {
   final Dog dog;
