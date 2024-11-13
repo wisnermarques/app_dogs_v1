@@ -25,7 +25,6 @@ class PessoaDetailsPage extends StatelessWidget {
             children: [
               HeaderWidget(pessoa: pessoa), // Usando o widget Header
               const SizedBox(height: 20),
-
               // Card de detalhes
               Card(
                 elevation: 8,
