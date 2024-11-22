@@ -72,10 +72,10 @@ class PessoaPageState extends State<PessoaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Lista de Clientes'),
-        backgroundColor: Colors.teal,
-      ),
+      // appBar: AppBar(
+      //   title: const Text('Lista de Clientes'),
+      //   backgroundColor: Colors.teal,
+      // ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: _isLoading // Condição para exibir o indicador de carregamento

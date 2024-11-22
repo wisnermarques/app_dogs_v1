@@ -1,6 +1,7 @@
 import 'package:app_dogs/data/repositories/user_repository.dart';
 import 'package:flutter/material.dart';
 import '../../viewmodels/user_viewmodel.dart';
+import 'login_page.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -35,10 +36,10 @@ class RegisterPageState extends State<RegisterPage> {
         ));
 
         if (message.contains("sucesso")) {
-          // Navigator.pushReplacement(
-          //   context,
-          //   MaterialPageRoute(builder: (context) => const LoginPage()),
-          // );
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const LoginPage()),
+          );
         }
       }
     }
@@ -142,11 +143,11 @@ class RegisterPageState extends State<RegisterPage> {
                 Center(
                   child: TextButton(
                     onPressed: () {
-                      // Navigator.pushReplacement(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => const LoginPage()),
-                      // );
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginPage()),
+                      );
                     },
                     child: const Text(
                       'Já tem login? Clique aqui para entrar',
